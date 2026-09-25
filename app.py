@@ -1,0 +1,24 @@
+from flask import Flask, jsonify
+from dotenv import load_dotenv
+import requests
+import os
+
+load_dotenv()
+
+app = Flask(__name__)
+
+NASA_API_KEY = os.getenv("NASA_API_KEY")
+
+@app.route("/")
+def home():
+    return "NASA Dashboard is running!"
+
+@app.route("/apod")
+def apod():
+    url = f"https://api.nasa.gov/planetary/apod?api_key={NASA_API_KEY}"
+    response = requests.get(url)
+    data = response.json()
+    return jsonify(data)
+
+if __name__ == "__main__":
+    app.run(debug=True)
