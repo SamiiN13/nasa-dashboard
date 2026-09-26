@@ -244,7 +244,8 @@ document.querySelectorAll('.toggle-btn').forEach(btn => {
 });
 
 document.getElementById('date-picker').addEventListener('change', (e) => {
-    loadAsteroids(e.target.value);
+    const val = e.target.value;
+    if (val) loadAsteroids(val);
 });
 
 // ── Init ───────────────────────────────────────────────
