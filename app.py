@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from dotenv import load_dotenv
 import requests
 import os
@@ -11,7 +11,7 @@ NASA_API_KEY = os.getenv("NASA_API_KEY")
 
 @app.route("/")
 def home():
-    return "NASA Dashboard is running!"
+    return render_template("index.html")
 
 @app.route("/apod")
 def apod():

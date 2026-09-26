@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a1a;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #0d1b2a, #1b2a4a);
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 1px solid #1e3a5f;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #63b3ed;
+    letter-spacing: 2px;
+}
+
+header p {
+    color: #90cdf4;
+    margin-top: 0.5rem;
+}
+
+main {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+section {
+    background: #0d1b2a;
+    border: 1px solid #1e3a5f;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+section h2 {
+    color: #63b3ed;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #1e3a5f;
+    padding-bottom: 0.75rem;
+}
+
+/* APOD */
+#apod-container img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+#apod-container h3 {
+    color: #90cdf4;
+    font-size: 1.3rem;
+}
+
+.apod-date {
+    color: #718096;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.apod-explanation {
+    color: #cbd5e0;
+    font-size: 0.95rem;
+}
+
+/* Asteroid Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+thead tr {
+    background: #1a2f4a;
+    color: #90cdf4;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #1e3a5f;
+}
+
+tbody tr:hover {
+    background: #1a2f4a;
+}
+
+tbody tr.hazardous {
+    background: #2d1515;
+    color: #fc8181;
+}
+
+tbody tr.hazardous:hover {
+    background: #3d1a1a;
+}
