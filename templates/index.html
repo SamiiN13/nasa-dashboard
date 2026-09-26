@@ -3,54 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NASA Dashboard</title>
+    <title>NASA Space Dashboard</title>
     <link rel="stylesheet" href="/static/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 
+    <canvas id="starfield"></canvas>
+
     <header>
-        <h1>🚀 NASA Space Dashboard</h1>
-        <p>Live data from NASA's open APIs</p>
+        <div class="header-content">
+            <h1>🚀 NASA Space Dashboard</h1>
+            <p>Live data from NASA's open APIs</p>
+            <div id="stats-bar">
+                <div class="stat">
+                    <span class="stat-number" id="total-count">-</span>
+                    <span class="stat-label">Asteroids This Week</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number hazard-number" id="hazard-count">-</span>
+                    <span class="stat-label">Potentially Hazardous</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="closest">-</span>
+                    <span class="stat-label">Closest Approach (km)</span>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main>
 
-        <!-- Stats Bar -->
-        <div id="stats-bar">
-            <div class="stat">
-                <span class="stat-number" id="total-count">-</span>
-                <span class="stat-label">Asteroids This Week</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number hazard-number" id="hazard-count">-</span>
-                <span class="stat-label">Potentially Hazardous</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number" id="closest">-</span>
-                <span class="stat-label">Closest Approach (km)</span>
-            </div>
-        </div>
-
-        <!-- APOD Section -->
+        <!-- APOD -->
         <section id="apod-section">
             <h2>Astronomy Picture of the Day</h2>
             <div id="apod-container">
-                <p>Loading...</p>
+                <div class="loading">Loading...</div>
             </div>
         </section>
 
-        <!-- Asteroid Chart -->
-        <section id="chart-section">
-            <h2>Asteroid Size Comparison</h2>
-            <canvas id="asteroidChart"></canvas>
-        </section>
-
-        <!-- Asteroids Section -->
+        <!-- Asteroid Explorer -->
         <section id="asteroid-section">
-            <h2>Near-Earth Asteroids This Week</h2>
-            <div id="asteroid-container">
-                <p>Loading...</p>
+            <div class="section-header">
+                <h2>Asteroid Explorer</h2>
+                <div class="controls">
+                    <input type="date" id="date-picker" />
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="hazardous">⚠️ Hazardous Only</button>
+                    </div>
+                    <div class="view-toggle">
+                        <button class="toggle-btn active" data-view="simple">Simple</button>
+                        <button class="toggle-btn" data-view="technical">Technical</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div id="chart-container">
+                <canvas id="asteroidChart"></canvas>
+            </div>
+
+            <!-- Cards -->
+            <div id="asteroid-cards">
+                <div class="loading">Loading asteroids...</div>
             </div>
         </section>
 
