@@ -15,6 +15,23 @@
     </header>
 
     <main>
+
+        <!-- Stats Bar -->
+        <div id="stats-bar">
+            <div class="stat">
+                <span class="stat-number" id="total-count">-</span>
+                <span class="stat-label">Asteroids This Week</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number hazard-number" id="hazard-count">-</span>
+                <span class="stat-label">Potentially Hazardous</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" id="closest">-</span>
+                <span class="stat-label">Closest Approach (km)</span>
+            </div>
+        </div>
+
         <!-- APOD Section -->
         <section id="apod-section">
             <h2>Astronomy Picture of the Day</h2>
@@ -28,7 +45,7 @@
             <h2>Asteroid Size Comparison</h2>
             <canvas id="asteroidChart"></canvas>
         </section>
-        
+
         <!-- Asteroids Section -->
         <section id="asteroid-section">
             <h2>Near-Earth Asteroids This Week</h2>
@@ -36,7 +53,12 @@
                 <p>Loading...</p>
             </div>
         </section>
+
     </main>
+
+    <footer>
+        <p>Data sourced from <a href="https://api.nasa.gov" target="_blank">NASA Open APIs</a> · Built by Samiha</p>
+    </footer>
 
     <script src="/static/app.js"></script>
 

@@ -78,3 +78,19 @@ fetch('/asteroids')
             }
         });
     });
+
+// Stats bar
+fetch('/asteroids')
+    .then(response => response.json())
+    .then(data => {
+        const allAsteroids = Object.values(data.near_earth_objects).flat();
+        const hazardous = allAsteroids.filter(a => a.is_potentially_hazardous_asteroid);
+        const closest = allAsteroids.reduce((min, a) => {
+            const dist = parseFloat(a.close_approach_data[0].miss_distance.kilometers);
+            return dist < min ? dist : min;
+        }, Infinity);
+
+        document.getElementById('total-count').textContent = allAsteroids.length;
+        document.getElementById('hazard-count').textContent = hazardous.length;
+        document.getElementById('closest').textContent = Math.round(closest).toLocaleString();
+    });
