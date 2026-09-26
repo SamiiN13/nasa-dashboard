@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NASA Dashboard</title>
     <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -22,6 +23,12 @@
             </div>
         </section>
 
+        <!-- Asteroid Chart -->
+        <section id="chart-section">
+            <h2>Asteroid Size Comparison</h2>
+            <canvas id="asteroidChart"></canvas>
+        </section>
+        
         <!-- Asteroids Section -->
         <section id="asteroid-section">
             <h2>Near-Earth Asteroids This Week</h2>

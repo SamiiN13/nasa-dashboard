@@ -38,3 +38,43 @@ fetch('/asteroids')
         html += '</tbody></table>';
         container.innerHTML = html;
     });
+
+// Asteroid Size Chart
+fetch('/asteroids')
+    .then(response => response.json())
+    .then(data => {
+        const allAsteroids = Object.values(data.near_earth_objects).flat();
+        
+        // Take top 15 by size for readability
+        const top15 = allAsteroids
+            .sort((a, b) => b.estimated_diameter.meters.estimated_diameter_max - a.estimated_diameter.meters.estimated_diameter_max)
+            .slice(0, 15);
+
+        const labels = top15.map(a => a.name);
+        const sizes = top15.map(a => Math.round(a.estimated_diameter.meters.estimated_diameter_max));
+        const colors = top15.map(a => a.is_potentially_hazardous_asteroid ? '#fc8181' : '#63b3ed');
+
+        const ctx = document.getElementById('asteroidChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Max Diameter (meters)',
+                    data: sizes,
+                    backgroundColor: colors,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: '#e0e0e0' } }
+                },
+                scales: {
+                    x: { ticks: { color: '#90cdf4', maxRotation: 45 } },
+                    y: { ticks: { color: '#90cdf4' }, grid: { color: '#1e3a5f' } }
+                }
+            }
+        });
+    });
