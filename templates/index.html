@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NASA Space Dashboard</title>
+    <title>Deep Sky — NASA Space Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -11,72 +12,84 @@
 
     <canvas id="starfield"></canvas>
 
-    <header>
-        <div class="header-content">
-            <h1>🚀 NASA Space Dashboard</h1>
-            <p>Live data from NASA's open APIs</p>
+    <button id="sound-toggle" title="Toggle ambient sound">♪</button>
+    <audio id="ambient-sound" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/03/10/audio_1e3b4e4b4d.mp3" type="audio/mpeg">
+    </audio>
+
+    <header id="hero">
+        <div id="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Live from NASA's open APIs</p>
+            <h1>Deep Sky</h1>
+            <p class="hero-sub">A window into what's happening in our corner of the solar system — right now.</p>
             <div id="stats-bar">
                 <div class="stat">
-                    <span class="stat-number" id="total-count">-</span>
-                    <span class="stat-label">Asteroids This Week</span>
+                    <span class="stat-number" id="total-count">—</span>
+                    <span class="stat-label">asteroids passing Earth</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number hazard-number" id="hazard-count">-</span>
-                    <span class="stat-label">Potentially Hazardous</span>
+                    <span class="stat-number hazard-num" id="hazard-count">—</span>
+                    <span class="stat-label">potentially hazardous</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number" id="closest">-</span>
-                    <span class="stat-label">Closest Approach (km)</span>
+                    <span class="stat-number" id="closest">—</span>
+                    <span class="stat-label">km — closest approach</span>
                 </div>
             </div>
         </div>
+        <div class="scroll-hint">↓</div>
     </header>
 
     <main>
 
-        <!-- APOD -->
         <section id="apod-section">
-            <h2>Astronomy Picture of the Day</h2>
+            <div class="section-label">today in space</div>
             <div id="apod-container">
-                <div class="loading">Loading...</div>
+                <div class="loading">Looking up...</div>
             </div>
         </section>
 
-        <!-- Asteroid Explorer -->
+        <section id="spotlight-section" style="display:none">
+            <div class="section-label">closest asteroid this week</div>
+            <div id="spotlight-card"></div>
+        </section>
+
         <section id="asteroid-section">
-            <div class="section-header">
-                <h2>Asteroid Explorer</h2>
+            <div class="section-top">
+                <div>
+                    <div class="section-label">asteroids</div>
+                    <h2>Passing Earth</h2>
+                </div>
                 <div class="controls">
                     <input type="date" id="date-picker" />
-                    <div class="filter-buttons">
+                    <div class="btn-group">
                         <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="hazardous">⚠️ Hazardous Only</button>
+                        <button class="filter-btn" data-filter="hazardous">Hazardous Only</button>
                     </div>
-                    <div class="view-toggle">
+                    <div class="btn-group">
                         <button class="toggle-btn active" data-view="simple">Simple</button>
                         <button class="toggle-btn" data-view="technical">Technical</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Chart -->
             <div id="chart-container">
                 <canvas id="asteroidChart"></canvas>
             </div>
 
-            <!-- Cards -->
             <div id="asteroid-cards">
-                <div class="loading">Loading asteroids...</div>
+                <div class="loading">Scanning the sky...</div>
             </div>
         </section>
 
     </main>
 
     <footer>
-        <p>Data sourced from <a href="https://api.nasa.gov" target="_blank">NASA Open APIs</a> · Built by Samiha</p>
+        <p>Data from <a href="https://api.nasa.gov" target="_blank">NASA Open APIs</a> · Built by Samiha · The universe is under no obligation to make sense to you.</p>
     </footer>
 
     <script src="/static/app.js"></script>
-
 </body>
 </html>
