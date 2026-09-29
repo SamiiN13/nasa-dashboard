@@ -12,15 +12,22 @@
 
     <canvas id="starfield"></canvas>
 
-    <button id="sound-toggle" title="Toggle ambient sound">♪</button>
+    <nav id="main-nav">
+        <div class="nav-logo">Deep Sky</div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-tab="sky">Sky</button>
+            <button class="nav-tab" data-tab="today">Today</button>
+            <button class="nav-tab" data-tab="asteroids">Asteroids</button>
+        </div>
+        <button id="sound-toggle" title="Toggle ambient sound">♪</button>
+    </nav>
     <audio id="ambient-sound" loop>
         <source src="https://cdn.pixabay.com/audio/2022/03/10/audio_1e3b4e4b4d.mp3" type="audio/mpeg">
     </audio>
 
-    <header id="hero">
-        <div id="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
+    <!-- SKY TAB -->
+    <div id="tab-sky" class="tab-content active">
+        <div class="tab-hero">
             <p class="hero-eyebrow">Live from NASA's open APIs</p>
             <h1>Deep Sky</h1>
             <p class="hero-sub">A window into what's happening in our corner of the solar system — right now.</p>
@@ -39,52 +46,100 @@
                 </div>
             </div>
         </div>
-        <div class="scroll-hint">↓</div>
-    </header>
 
-    <main>
+        <div class="sky-grid">
+            <!-- Solar System -->
+            <div class="sky-panel" id="solar-panel">
+                <div class="panel-label">live solar system · 50x speed</div>
+                <canvas id="solar-canvas"></canvas>
+                <p class="panel-caption">Real asteroid positions from NASA data. Hover to identify. Click to explore.</p>
+            </div>
 
-        <section id="apod-section">
+            <!-- ISS Globe -->
+            <div class="sky-panel" id="iss-panel">
+                <div class="panel-label">
+                    international space station
+                    <span class="live-badge"><span class="live-dot"></span>LIVE</span>
+                </div>
+                <canvas id="globe-canvas"></canvas>
+                <div id="iss-info">
+                    <div class="iss-stat">
+                        <span class="iss-val" id="iss-lat">—</span>
+                        <span class="iss-label">latitude</span>
+                    </div>
+                    <div class="iss-stat">
+                        <span class="iss-val" id="iss-lng">—</span>
+                        <span class="iss-label">longitude</span>
+                    </div>
+                    <div class="iss-stat">
+                        <span class="iss-val">408 km</span>
+                        <span class="iss-label">altitude</span>
+                    </div>
+                    <div class="iss-stat">
+                        <span class="iss-val">27,600 km/h</span>
+                        <span class="iss-label">speed</span>
+                    </div>
+                </div>
+                <p class="panel-caption">The ISS orbits Earth every 90 minutes. Position updates every 5 seconds.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TODAY TAB -->
+    <div id="tab-today" class="tab-content">
+        <div class="tab-inner">
             <div class="section-label">today in space</div>
             <div id="apod-container">
                 <div class="loading">Looking up...</div>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <section id="spotlight-section" style="display:none">
-            <div class="section-label">closest asteroid this week</div>
-            <div id="spotlight-card"></div>
-        </section>
+    <!-- ASTEROIDS TAB -->
+    <div id="tab-asteroids" class="tab-content">
+        <div class="tab-inner">
 
-        <section id="asteroid-section">
-            <div class="section-top">
-                <div>
-                    <div class="section-label">asteroids</div>
-                    <h2>Passing Earth</h2>
-                </div>
-                <div class="controls">
-                    <input type="date" id="date-picker" />
-                    <div class="btn-group">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="hazardous">Hazardous Only</button>
+            <section id="spotlight-section" style="display:none">
+                <div class="section-label">closest asteroid this week</div>
+                <div id="spotlight-card"></div>
+            </section>
+
+            <section id="asteroid-section">
+                <div class="section-top">
+                    <div>
+                        <div class="section-label">asteroids</div>
+                        <h2>Passing Earth</h2>
                     </div>
-                    <div class="btn-group">
-                        <button class="toggle-btn active" data-view="simple">Simple</button>
-                        <button class="toggle-btn" data-view="technical">Technical</button>
+                    <div class="controls">
+                        <input type="date" id="date-picker" />
+                        <div class="btn-group">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="hazardous">Hazardous Only</button>
+                        </div>
+                        <div class="btn-group">
+                            <button class="toggle-btn active" data-view="simple">Simple</button>
+                            <button class="toggle-btn" data-view="technical">Technical</button>
+                        </div>
+                        <button id="mini-solar-toggle" class="mini-solar-btn">⊙ View in Solar System</button>
                     </div>
                 </div>
-            </div>
 
-            <div id="chart-container">
-                <canvas id="asteroidChart"></canvas>
-            </div>
+                <!-- Mini solar system toggle -->
+                <div id="mini-solar-wrap" style="display:none">
+                    <canvas id="mini-solar-canvas"></canvas>
+                    <p class="panel-caption">This week's asteroids in the solar system. Hover to identify.</p>
+                </div>
 
-            <div id="asteroid-cards">
-                <div class="loading">Scanning the sky...</div>
-            </div>
-        </section>
+                <div id="chart-container">
+                    <canvas id="asteroidChart"></canvas>
+                </div>
 
-    </main>
+                <div id="asteroid-cards">
+                    <div class="loading">Scanning the sky...</div>
+                </div>
+            </section>
+        </div>
+    </div>
 
     <footer>
         <p>Data from <a href="https://api.nasa.gov" target="_blank">NASA Open APIs</a> · Built by Samiha · The universe is under no obligation to make sense to you.</p>

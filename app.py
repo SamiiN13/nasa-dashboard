@@ -33,5 +33,12 @@ def asteroids():
         return jsonify({"error": "Failed to fetch asteroids"})
     return jsonify(response.json())
 
+@app.route("/iss")
+def iss():
+    response = requests.get("http://api.open-notify.org/iss-now.json")
+    if response.status_code != 200:
+        return jsonify({"error": "Failed to fetch ISS location"})
+    return jsonify(response.json())
+
 if __name__ == "__main__":
     app.run(debug=True)
