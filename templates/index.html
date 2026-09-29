@@ -16,7 +16,7 @@
         <div class="nav-logo">Deep Sky</div>
         <div class="nav-tabs">
             <button class="nav-tab active" data-tab="sky">Sky</button>
-            <button class="nav-tab" data-tab="today">Today</button>
+            <button class="nav-tab" data-tab="today">Sky & APOD</button>
             <button class="nav-tab" data-tab="asteroids">Asteroids</button>
         </div>
         <button id="sound-toggle" title="Toggle ambient sound">♪</button>
@@ -82,16 +82,55 @@
                 </div>
                 <p class="panel-caption">The ISS orbits Earth every 90 minutes. Position updates every 5 seconds.</p>
             </div>
+
+            <!-- Live Sky Camera -->
+            <div class="sky-panel sky-panel-wide" id="livecam-panel">
+                <div class="panel-label">
+                    live night sky · McDonald Observatory, Texas
+                    <span class="live-badge"><span class="live-dot"></span>LIVE</span>
+                </div>
+                <div class="livecam-wrap">
+                    <iframe
+                        src="https://www.youtube.com/embed/WZPBnRPqmeo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                    </iframe>
+                    <div class="livecam-vignette"></div>
+                </div>
+                <p class="panel-caption">A real all-sky camera watching the Texas night sky 24/7. When it's daytime there, you'll see the dome or a static image — check back after dark.</p>
+            </div>
         </div>
     </div>
 
-    <!-- TODAY TAB -->
+    <!-- SKY & APOD TAB -->
     <div id="tab-today" class="tab-content">
         <div class="tab-inner">
-            <div class="section-label">today in space</div>
-            <div id="apod-container">
-                <div class="loading">Looking up...</div>
+
+            <!-- Today's APOD -->
+            <div class="apod-block">
+                <div class="section-label">astronomy picture of the day</div>
+                <div id="apod-container">
+                    <div class="loading">Looking up...</div>
+                </div>
             </div>
+
+            <!-- Historical APOD -->
+            <div class="apod-block" id="historical-block">
+                <div class="apod-history-header">
+                    <div class="section-label">explore any date</div>
+                    <p class="history-sub">NASA has published an astronomy picture every day since June 16, 1995. Pick any date.</p>
+                    <div class="history-controls">
+                        <input type="date" id="apod-date-picker"
+                            min="1995-06-16"
+                            max=""
+                            placeholder="Pick a date" />
+                        <button id="apod-date-btn">Look up</button>
+                    </div>
+                </div>
+                <div id="apod-historical-container"></div>
+            </div>
+
         </div>
     </div>
 
@@ -124,7 +163,6 @@
                     </div>
                 </div>
 
-                <!-- Mini solar system toggle -->
                 <div id="mini-solar-wrap" style="display:none">
                     <canvas id="mini-solar-canvas"></canvas>
                     <p class="panel-caption">This week's asteroids in the solar system. Hover to identify.</p>
@@ -142,7 +180,7 @@
     </div>
 
     <footer>
-        <p>Data from <a href="https://api.nasa.gov" target="_blank">NASA Open APIs</a> · Built by Samiha · The universe is under no obligation to make sense to you.</p>
+        <p>Data from <a href="https://api.nasa.gov" target="_blank">NASA Open APIs</a> · Built by Sam · The Cosmos is all that is, or was, or ever will be.</p>
     </footer>
 
     <script src="/static/app.js"></script>

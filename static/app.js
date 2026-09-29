@@ -527,35 +527,60 @@ setInterval(updateISS, 5000);
 setInterval(drawGlobe, 100);
 
 // ── APOD ───────────────────────────────────────────────
+function renderAPOD(data, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    if (data.error) {
+        container.innerHTML = `<p style="color:var(--muted);font-size:0.85rem">No image available for that date.</p>`;
+        return;
+    }
+
+    const sentences = data.explanation.split('. ');
+    const pullquote = sentences.find(s => s.length > 60 && s.length < 200) || sentences[0];
+    const isRealPhoto = data.url && data.url.includes('/image/');
+
+    if (data.media_type === 'image') {
+        container.innerHTML = `
+            <p class="apod-title">${data.title}</p>
+            <p class="apod-date">${data.date}</p>
+            ${isRealPhoto ? `<img src="${data.url}" alt="${data.title}" />` : ''}
+            <p class="apod-pullquote">"${pullquote}."</p>
+            <p class="apod-body">${data.explanation}</p>
+        `;
+    } else {
+        container.innerHTML = `
+            <p class="apod-title">${data.title}</p>
+            <p class="apod-date">${data.date}</p>
+            <p class="apod-pullquote">"${pullquote}."</p>
+            <p class="apod-body">${data.explanation}</p>
+            <p style="margin-top:1rem;font-size:0.82rem;color:#4a5568">
+                This feature is a video —
+                <a href="${data.url}" target="_blank" style="color:#63b3ed">watch it here →</a>
+            </p>
+        `;
+    }
+}
+
+// Load today's APOD
 fetch('/apod')
     .then(r => r.json())
-    .then(data => {
-        const container = document.getElementById('apod-container');
-        const sentences = data.explanation.split('. ');
-        const pullquote = sentences.find(s => s.length > 60 && s.length < 200) || sentences[0];
-        const isRealPhoto = data.url && data.url.includes('/image/');
+    .then(data => renderAPOD(data, 'apod-container'));
 
-        if (data.media_type === 'image') {
-            container.innerHTML = `
-                <p class="apod-title">${data.title}</p>
-                <p class="apod-date">${data.date}</p>
-                ${isRealPhoto ? `<img src="${data.url}" alt="${data.title}" />` : ''}
-                <p class="apod-pullquote">"${pullquote}."</p>
-                <p class="apod-body">${data.explanation}</p>
-            `;
-        } else {
-            container.innerHTML = `
-                <p class="apod-title">${data.title}</p>
-                <p class="apod-date">${data.date}</p>
-                <p class="apod-pullquote">"${pullquote}."</p>
-                <p class="apod-body">${data.explanation}</p>
-                <p style="margin-top:1rem;font-size:0.82rem;color:#4a5568">
-                    Today's feature is a video —
-                    <a href="${data.url}" target="_blank" style="color:#63b3ed">watch it here →</a>
-                </p>
-            `;
-        }
-    });
+// Set max date on picker to today
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('apod-date-picker').max = today;
+
+// Historical APOD lookup
+document.getElementById('apod-date-btn').addEventListener('click', () => {
+    const date = document.getElementById('apod-date-picker').value;
+    if (!date) return;
+    const container = document.getElementById('apod-historical-container');
+    container.innerHTML = '<div class="loading">Looking up...</div>';
+    fetch(`/apod?date=${date}`)
+        .then(r => r.json())
+        .then(data => renderAPOD(data, 'apod-historical-container'));
+});
 
 // ── Asteroids ──────────────────────────────────────────
 let allAsteroids = [];

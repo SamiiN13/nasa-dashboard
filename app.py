@@ -15,7 +15,10 @@ def home():
 
 @app.route("/apod")
 def apod():
+    date = request.args.get("date")
     url = f"https://api.nasa.gov/planetary/apod?api_key={NASA_API_KEY}"
+    if date:
+        url += f"&date={date}"
     response = requests.get(url)
     if response.status_code != 200:
         return jsonify({"error": "Failed to fetch APOD"})
