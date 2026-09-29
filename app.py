@@ -21,6 +21,11 @@ def apod():
         return jsonify({"error": "Failed to fetch APOD"})
     return jsonify(response.json())
 
+@app.route("/debug")
+def debug():
+    key = os.getenv("NASA_API_KEY")
+    return jsonify({"key_loaded": key is not None, "key_preview": key[:5] if key else "none"})
+
 @app.route("/asteroids")
 def asteroids():
     start_date = request.args.get("start_date")
