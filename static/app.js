@@ -1,3 +1,33 @@
+// ── Loading Screen ─────────────────────────────────────
+const loaderStars = document.getElementById('loader-stars');
+const lctx = loaderStars.getContext('2d');
+loaderStars.width = window.innerWidth;
+loaderStars.height = window.innerHeight;
+
+const loaderStarList = Array.from({ length: 200 }, () => ({
+    x: Math.random() * loaderStars.width,
+    y: Math.random() * loaderStars.height,
+    r: Math.random() * 1.2,
+    alpha: Math.random()
+}));
+
+function drawLoaderStars() {
+    lctx.clearRect(0, 0, loaderStars.width, loaderStars.height);
+    loaderStarList.forEach(s => {
+        lctx.beginPath();
+        lctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        lctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        lctx.fill();
+    });
+}
+drawLoaderStars();
+
+setTimeout(() => {
+    const screen = document.getElementById('loading-screen');
+    screen.classList.add('hidden');
+    setTimeout(() => screen.style.display = 'none', 800);
+}, 2500);
+
 // ── Starfield + Shooting Stars ─────────────────────────
 const canvas = document.getElementById('starfield');
 const ctx2 = canvas.getContext('2d');
@@ -532,7 +562,7 @@ function renderAPOD(data, containerId) {
     if (!container) return;
 
     if (data.error) {
-        container.innerHTML = `<p style="color:var(--muted);font-size:0.85rem">No image available for that date.</p>`;
+        container.innerHTML = `<p style="color:var(--muted);font-size:0.85rem;letter-spacing:1px">NASA hasn't published a picture for that date yet — try another.</p>`;
         return;
     }
 

@@ -10,6 +10,16 @@
 </head>
 <body>
 
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <canvas id="loader-stars"></canvas>
+            <p class="loader-eyebrow">Deep Sky</p>
+            <p class="loader-text">Waking up the observatory...</p>
+            <div class="loader-bar"><div class="loader-fill"></div></div>
+        </div>
+    </div>
+
     <canvas id="starfield"></canvas>
 
     <nav id="main-nav">
@@ -83,22 +93,34 @@
                 <p class="panel-caption">The ISS orbits Earth every 90 minutes. Position updates every 5 seconds.</p>
             </div>
 
-            <!-- Live Sky Camera -->
-            <div class="sky-panel sky-panel-wide" id="livecam-panel">
+            <!-- NASA TV Link -->
+            <div class="sky-panel sky-panel-wide" id="nasatv-panel">
                 <div class="panel-label">
-                    live night sky · McDonald Observatory, Texas
+                    NASA TV · Live broadcast
                     <span class="live-badge"><span class="live-dot"></span>LIVE</span>
                 </div>
-                <div class="livecam-wrap">
-                    <iframe
-                        src="https://www.youtube.com/embed/WZPBnRPqmeo?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen>
-                    </iframe>
-                    <div class="livecam-vignette"></div>
+                <div class="nasatv-block">
+                    <div class="nasatv-left">
+                        <p class="nasatv-title">Watch NASA TV Live</p>
+                        <p class="nasatv-desc">NASA broadcasts live 24/7 — rocket launches, ISS operations, spacewalks, press conferences, and Earth views from space. It's on right now.</p>
+                        <a href="https://www.nasa.gov/nasatv" target="_blank" class="nasatv-btn">
+                            Watch on NASA.gov →
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=nOBnVMGR9s0" target="_blank" class="nasatv-btn nasatv-btn-secondary">
+                            Watch on YouTube →
+                        </a>
+                    </div>
+                    <div class="nasatv-right">
+                        <div class="nasatv-schedule">
+                            <p class="nasatv-schedule-title">What NASA TV covers</p>
+                            <div class="nasatv-item">🚀 Rocket launches & countdowns</div>
+                            <div class="nasatv-item">🛸 ISS operations & spacewalks</div>
+                            <div class="nasatv-item">🌍 Earth from space, live</div>
+                            <div class="nasatv-item">🔭 Science briefings & discoveries</div>
+                            <div class="nasatv-item">🌙 Moon & Mars mission coverage</div>
+                        </div>
+                    </div>
                 </div>
-                <p class="panel-caption">A real all-sky camera watching the Texas night sky 24/7. When it's daytime there, you'll see the dome or a static image — check back after dark.</p>
             </div>
         </div>
     </div>
@@ -106,8 +128,6 @@
     <!-- SKY & APOD TAB -->
     <div id="tab-today" class="tab-content">
         <div class="tab-inner">
-
-            <!-- Today's APOD -->
             <div class="apod-block">
                 <div class="section-label">astronomy picture of the day</div>
                 <div id="apod-container">
@@ -115,22 +135,17 @@
                 </div>
             </div>
 
-            <!-- Historical APOD -->
             <div class="apod-block" id="historical-block">
                 <div class="apod-history-header">
                     <div class="section-label">explore any date</div>
                     <p class="history-sub">NASA has published an astronomy picture every day since June 16, 1995. Pick any date.</p>
                     <div class="history-controls">
-                        <input type="date" id="apod-date-picker"
-                            min="1995-06-16"
-                            max=""
-                            placeholder="Pick a date" />
+                        <input type="date" id="apod-date-picker" min="1995-06-16" max="" />
                         <button id="apod-date-btn">Look up</button>
                     </div>
                 </div>
                 <div id="apod-historical-container"></div>
             </div>
-
         </div>
     </div>
 
@@ -180,7 +195,7 @@
     </div>
 
     <footer>
-        <p>Data from <a href="https://api.nasa.gov" target="_blank">NASA Open APIs</a> · Built by Sam · The Cosmos is all that is, or was, or ever will be.</p>
+        <p>Data from <a href="https://api.nasa.gov" target="_blank">NASA Open APIs</a> · Built by Samiha · The universe is under no obligation to make sense to you.</p>
     </footer>
 
     <script src="/static/app.js"></script>

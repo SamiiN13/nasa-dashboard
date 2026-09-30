@@ -776,3 +776,157 @@ footer a:hover { text-decoration: underline; }
     margin: 1.25rem 0 1rem;
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
+
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: #050810;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-content {
+    text-align: center;
+    position: relative;
+}
+
+#loader-stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.loader-eyebrow {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--white);
+    letter-spacing: 4px;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.loader-text {
+    font-size: 0.78rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.loader-bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.loader-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--blue-dim));
+    border-radius: 2px;
+    animation: loader-progress 2.5s ease forwards;
+}
+
+@keyframes loader-progress {
+    from { width: 0%; }
+    to   { width: 100%; }
+}
+
+/* NASA TV Panel */
+.nasatv-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 1rem 0;
+}
+
+@media (max-width: 700px) {
+    .nasatv-block { grid-template-columns: 1fr; }
+}
+
+.nasatv-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+}
+
+.nasatv-desc {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    max-width: 420px;
+}
+
+.nasatv-btn {
+    display: inline-block;
+    background: rgba(99,179,237,0.1);
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-right: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.nasatv-btn:hover {
+    background: rgba(99,179,237,0.2);
+    color: var(--white);
+}
+
+.nasatv-btn-secondary {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--muted);
+}
+
+.nasatv-btn-secondary:hover {
+    border-color: var(--blue-dim);
+    color: var(--blue-dim);
+}
+
+.nasatv-schedule {
+    background: rgba(5,8,16,0.5);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.nasatv-schedule-title {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 1rem;
+}
+
+.nasatv-item {
+    font-size: 0.85rem;
+    color: var(--text);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.4;
+}
+
+.nasatv-item:last-child { border-bottom: none; }
